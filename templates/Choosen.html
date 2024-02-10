@@ -19,10 +19,20 @@
             padding-bottom: 15px;
             color: #FFFFCC;
             box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+        }
         a{
-
             text-decoration: none;
             color: #FFFFCC;
+            font-size: 20px;
+            margin-right: 30px;
+            margin-left: 15px;
+        }
+        button{
+            height: 50px;
+            width: 120px;
+            background: linear-gradient(rgb(34,34,34), black)
+        }
+        p{
             font-size: 20px;
             margin-right: 30px;
             margin-left: 15px;
@@ -32,14 +42,23 @@
 </head>
 <body>
     <div class = "header">
-        Ваш заказ:
+        Корзина
         <a href="http://127.0.0.1:5000/h">Назад до головної сторінки</a>
     </div>
-    {% if order %}
-        <p>Ваш заказ: <span>{{order}}</span></p>
+
+    {% if amount%}
+        <p>Ваш заказ: <br> Количество:<span>{{amount}}</span></p>
+    {% endif %}
+    {% if name%}
+        <p>Название:<span>{{name}}</span></p>
     {% endif %}
     {% if price %}
         <p>Цена: <span>{{price}}</span></p>
     {% endif %}
+
+    <br>
+    <br>
+    <br>
+    <button><a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">Купить</a></button>
 </body>
 </html>

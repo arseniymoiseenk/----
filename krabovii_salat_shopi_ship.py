@@ -7,35 +7,38 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 orders = {}
-times = 0
-List = []
+
+Dict = {}
 prices = []
+List = []
+List1 = []
+
 @app.route("/Chosen")
-def choosen(times = times):
+def choosen():
     if orders != {}:
-        times += 1
-        List.append(str(orders["Заказ" + str(times)]))
         prices.append(int(orders['Цена']))
-        return render_template("Choosen.html", order=List, price =sum(prices))
+        List.append(orders["Количество"])
+        List1.append(orders["Название"])
+        return render_template("Choosen.html",amount=List,name=List1, price =sum(prices))
     else:
         return render_template("Choosen.html")
 @app.route("/buy_krabovii_salat", methods=['GET','POST'])
-def buy_krabovii_salat(times = times):
+def buy_krabovii_salat():
     amount = request.form.get("amount")
     name = request.form.get("name")
     if name == 'Звичайний':
-        times += 1
+        orders["Количество" ] = amount
+        orders["Название"] = name
+        orders['Цена'] = int(amount) * 90
 
-        orders["Заказ" + str(times)] = [amount, name]
-        orders['Цена'] = int(amount ) * 90
     if name == 'Крутой':
-        times += 1
-        orders["Заказ" + str(times)] = [amount, name]
+        orders["Количество"] = amount
+        orders["Название"] = name
         orders['Цена'] = int(amount ) * 734
-    if name == 'Красавчик':
-        times += 1
 
-        orders["Заказ" + str(times)] = [amount, name]
+    if name == 'Красавчик':
+        orders["Количество"] = amount
+        orders["Название"] = name
         orders['Цена'] = int(amount ) * 993
     return render_template("index.html")
 
@@ -58,7 +61,6 @@ def register():
 @app.route("/h")
 def index():
     return render_template("index.html")
-
 
 @app.route("/Things")
 def things():
