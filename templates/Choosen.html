@@ -47,11 +47,15 @@
     </div>
 
     {% if amount%}
-        <p>Ваш заказ: <br> Количество:<span>{{amount}}</span></p>
+        {% if name %}
+            {% for i in amount %}
+                {% for b in name%}
+                    <p>Ваш заказ: <br> Количество: <span>{{i}}</span>, Назва: <span>{{b}}</span></p>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
     {% endif %}
-    {% if name%}
-        <p>Название:<span>{{name}}</span></p>
-    {% endif %}
+
     {% if price %}
         <p>Цена: <span>{{price}}</span></p>
     {% endif %}

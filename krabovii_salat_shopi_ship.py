@@ -13,33 +13,36 @@ prices = []
 List = []
 List1 = []
 
+
 @app.route("/Chosen")
 def choosen():
     if orders != {}:
         prices.append(int(orders['Цена']))
         List.append(orders["Количество"])
         List1.append(orders["Название"])
-        return render_template("Choosen.html",amount=List,name=List1, price =sum(prices))
+        return render_template("Choosen.html",amount=List, name=List1, price=sum(prices))
     else:
         return render_template("Choosen.html")
+
+
 @app.route("/buy_krabovii_salat", methods=['GET','POST'])
 def buy_krabovii_salat():
     amount = request.form.get("amount")
     name = request.form.get("name")
     if name == 'Звичайний':
-        orders["Количество" ] = amount
+        orders["Количество"] = amount
         orders["Название"] = name
         orders['Цена'] = int(amount) * 90
 
     if name == 'Крутой':
         orders["Количество"] = amount
         orders["Название"] = name
-        orders['Цена'] = int(amount ) * 734
+        orders['Цена'] = int(amount) * 734
 
     if name == 'Красавчик':
         orders["Количество"] = amount
         orders["Название"] = name
-        orders['Цена'] = int(amount ) * 993
+        orders['Цена'] = int(amount) * 993
     return render_template("index.html")
 
 
@@ -58,13 +61,18 @@ def register():
     users = User.query.all()
     users = []
     return render_template("register.html", users=users)
+
+
 @app.route("/h")
 def index():
     return render_template("index.html")
 
+
 @app.route("/Things")
 def things():
     return render_template("Things_to_buy.html")
+
+
 @app.route("/add_user", methods=["POST"])
 def add_user():
     name = request.form["name"]
